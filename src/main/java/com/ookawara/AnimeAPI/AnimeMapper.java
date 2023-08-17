@@ -15,4 +15,6 @@ public interface AnimeMapper {
     @Select("SELECT * FROM anime WHERE id = #{id}")
     Optional<Anime> findById(int id);
 
+    @Select("SELECT * FROM anime WHERE episode >= #{episode}")
+    List<Anime> findByEpisodes(int episode);
 }

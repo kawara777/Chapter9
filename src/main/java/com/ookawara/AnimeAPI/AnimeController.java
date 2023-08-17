@@ -1,10 +1,9 @@
 package com.ookawara.AnimeAPI;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -25,6 +24,11 @@ public AnimeMapper animeMapper;
     @GetMapping("/anime/{id}")
     public Optional<Anime> findById (@PathVariable int id){
         return animeMapper.findById(id);
+    }
+
+    @GetMapping("/anime-episode")
+    public List<Anime> responseEpisodes(@RequestParam("episodes") int episode){
+        return animeMapper.findByEpisodes(episode);
     }
 
 }
