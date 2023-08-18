@@ -1,19 +1,12 @@
-package com.ookawara.AnimeAPI;
+package com.ookawara.AnimeAPI.controller;
 
-public class Anime {
-
-    private int id;
+public class AnimeResponse {
     private String name;
     private int episode;
 
-    public Anime(int id, String name, int episode) {
-        this.id = id;
+    public AnimeResponse(String name, int episode) {
         this.name = name;
         this.episode = episode;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getName() {

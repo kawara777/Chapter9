@@ -1,5 +1,6 @@
-package com.ookawara.AnimeAPI;
+package com.ookawara.AnimeAPI.mapper;
 
+import com.ookawara.AnimeAPI.entity.Anime;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -15,6 +16,6 @@ public interface AnimeMapper {
     @Select("SELECT * FROM anime WHERE id = #{id}")
     Optional<Anime> findById(int id);
 
-    @Select("SELECT * FROM anime WHERE episode >= #{episode}")
+    @Select("SELECT * FROM anime WHERE episode <= #{episode}")
     List<Anime> findByEpisodes(int episode);
 }
