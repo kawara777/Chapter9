@@ -11,6 +11,6 @@ public interface AnimeService {
 
     Optional<Anime> findById(int id);
 
-    List<Anime> findByEpisodes(int episode);
+    List<Anime> findUpToEpisode(int episode);
 
 }

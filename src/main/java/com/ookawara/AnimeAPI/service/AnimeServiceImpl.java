@@ -27,7 +27,7 @@ public class AnimeServiceImpl implements AnimeService{
     }
 
     @Override
-    public List<Anime> findByEpisodes(int episode){
-        return animeMapper.findByEpisodes(episode);
+    public List<Anime> findUpToEpisode(int episode){
+        return animeMapper.findUpToEpisode(episode);
     }
 }
