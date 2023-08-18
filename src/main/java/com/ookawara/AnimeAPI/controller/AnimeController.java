@@ -19,23 +19,23 @@ public AnimeService animeService;
 
     @GetMapping
     public List<AnimeResponse> anime(){
-        List<Anime> anime = animeService.findAll();
-        List<AnimeResponse> responses = anime.stream().map(anime1 -> new AnimeResponse(anime1.getName(), anime1.getEpisode())).toList();
+        List<Anime> animes = animeService.findAll();
+        List<AnimeResponse> responses = animes.stream().map(anime -> new AnimeResponse(anime.getName(), anime.getEpisode())).toList();
         return responses;
     }
 
     @GetMapping("/{id}")
     public List<AnimeResponse> findById (@PathVariable int id) {
-        Optional<Anime> anime = animeService.findById(id);
-        List<AnimeResponse> responses = anime.stream().map(anime1 -> new AnimeResponse(anime1.getName(), anime1.getEpisode())).toList();
+        Optional<Anime> animes = animeService.findById(id);
+        List<AnimeResponse> responses = animes.stream().map(anime -> new AnimeResponse(anime.getName(), anime.getEpisode())).toList();
 
             return responses;
     }
 
     @GetMapping("/episodes")
-    public List<AnimeResponse> findByEpisodes(@RequestParam("episodes") int episode){
-        List<Anime> anime = animeService.findByEpisodes(episode);
-        List<AnimeResponse> responses = anime.stream().map(anime1 -> new AnimeResponse(anime1.getName(), anime1.getEpisode())).toList();
+    public List<AnimeResponse> findUpToEpisode(@RequestParam("episodes") int episode){
+        List<Anime> animes = animeService.findUpToEpisode(episode);
+        List<AnimeResponse> responses = animes.stream().map(anime -> new AnimeResponse(anime.getName(), anime.getEpisode())).toList();
         return responses;
     }
 
