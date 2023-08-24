@@ -12,6 +12,11 @@ public class Anime {
         this.episode = episode;
     }
 
+    public Anime(String name, int episode) {
+        this.name = name;
+        this.episode = episode;
+    }
+
     public int getId() {
         return id;
     }

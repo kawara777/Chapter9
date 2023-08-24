@@ -30,4 +30,11 @@ public class AnimeServiceImpl implements AnimeService{
     public List<Anime> findUpToEpisode(int episode){
         return animeMapper.findUpToEpisode(episode);
     }
+
+    @Override
+    public Anime createAnimeData(String name, int episode){
+        Anime anime = new Anime(name, episode);
+        animeMapper.createAnimeData(anime);
+        return anime;
+    }
 }

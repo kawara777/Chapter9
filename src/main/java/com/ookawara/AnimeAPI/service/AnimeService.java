@@ -13,4 +13,5 @@ public interface AnimeService {
 
     List<Anime> findUpToEpisode(int episode);
 
+    Anime createAnimeData(String name, int episode);
 }
