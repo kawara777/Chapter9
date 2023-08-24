@@ -1,8 +1,8 @@
 package com.ookawara.AnimeAPI.mapper;
 
 import com.ookawara.AnimeAPI.entity.Anime;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,4 +18,8 @@ public interface AnimeMapper {
 
     @Select("SELECT * FROM anime WHERE episode <= #{episode}")
     List<Anime> findUpToEpisode(int episode);
+
+    @Insert("insert into anime (name,episode) values (#{name},#{episode})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+     void createAnimeData(Anime createAnimeData);
 }
