@@ -1,7 +1,6 @@
 package com.ookawara.AnimeAPI.service;
 
 import com.ookawara.AnimeAPI.entity.Anime;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;

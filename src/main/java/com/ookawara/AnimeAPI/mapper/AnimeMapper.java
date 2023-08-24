@@ -2,7 +2,6 @@ package com.ookawara.AnimeAPI.mapper;
 
 import com.ookawara.AnimeAPI.entity.Anime;
 import org.apache.ibatis.annotations.*;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
