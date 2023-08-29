@@ -37,4 +37,14 @@ public class AnimeServiceImpl implements AnimeService{
         animeMapper.createAnimeData(anime);
         return anime;
     }
+
+    @Override
+    public void updateAnimeData(int id,String name,int episode){
+        animeMapper.updateAnimeData(id,name,episode);
+    }
+
+    @Override
+    public void deleteById(int id){
+        animeMapper.deleteById(id);
+    }
 }
