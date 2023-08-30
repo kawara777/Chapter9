@@ -1,14 +1,16 @@
-package com.ookawara.AnimeAPI.controller;
+package com.ookawara.animeapi.controller;
 
-import com.ookawara.AnimeAPI.AnimeCreateForm;
-import com.ookawara.AnimeAPI.service.AnimeService;
-import com.ookawara.AnimeAPI.entity.Anime;
+import com.ookawara.animeapi.entity.Anime;
+import com.ookawara.animeapi.form.AnimeCreateForm;
+import com.ookawara.animeapi.form.AnimeUpdateForm;
+import com.ookawara.animeapi.service.AnimeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -32,7 +34,6 @@ public class AnimeController {
     public List<AnimeResponse> findById(@PathVariable int id) {
         Optional<Anime> animeList = animeService.findById(id);
         List<AnimeResponse> responses = animeList.stream().map(anime -> new AnimeResponse(anime.getName(), anime.getEpisode())).toList();
-
         return responses;
     }
 
@@ -51,5 +52,17 @@ public class AnimeController {
                 .build()
                 .toUri();
         return ResponseEntity.created(url).body(animeList);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Map<String,String>> updateAnimeDate(@PathVariable int id, @RequestBody AnimeUpdateForm form){
+        animeService.updateAnimeData(id,form.getName(),form.getEpisode());
+        return ResponseEntity.ok(Map.of("message","Anime successfully updated"));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable int id){
+        animeService.deleteById(id);
+        return ResponseEntity.ok("Anime data was successfully created");
     }
 }

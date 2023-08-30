@@ -1,4 +1,4 @@
-package com.ookawara.AnimeAPI;
+package com.ookawara.animeapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

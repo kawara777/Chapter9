@@ -1,7 +1,7 @@
-package com.ookawara.AnimeAPI.service;
+package com.ookawara.animeapi.service;
 
-import com.ookawara.AnimeAPI.entity.Anime;
-import com.ookawara.AnimeAPI.mapper.AnimeMapper;
+import com.ookawara.animeapi.entity.Anime;
+import com.ookawara.animeapi.mapper.AnimeMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,5 +36,15 @@ public class AnimeServiceImpl implements AnimeService{
         Anime anime = new Anime(name, episode);
         animeMapper.createAnimeData(anime);
         return anime;
+    }
+
+    @Override
+    public void updateAnimeData(int id, String name, int episode){
+        animeMapper.updateAnimeData(id, name ,episode);
+    }
+
+    @Override
+    public void deleteById(int id){
+        animeMapper.deleteById(id);
     }
 }

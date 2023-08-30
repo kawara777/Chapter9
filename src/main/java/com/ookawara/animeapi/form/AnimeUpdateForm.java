@@ -1,10 +1,11 @@
-package com.ookawara.AnimeAPI;
+package com.ookawara.animeapi.form;
 
-public class AnimeCreateForm {
+public class AnimeUpdateForm {
+
     private String name;
     private int episode;
 
-    public AnimeCreateForm(String name, int episode) {
+    public AnimeUpdateForm(String name, int episode) {
         this.name = name;
         this.episode = episode;
     }
