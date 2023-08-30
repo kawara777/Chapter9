@@ -4,7 +4,10 @@ import com.ookawara.animeapi.entity.Anime;
 import com.ookawara.animeapi.form.AnimeCreateForm;
 import com.ookawara.animeapi.form.AnimeUpdateForm;
 import com.ookawara.animeapi.service.AnimeService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -13,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Validated
 @RestController
 @RequestMapping("/anime")
 public class AnimeController {
@@ -24,28 +28,26 @@ public class AnimeController {
     }
 
     @GetMapping
-    public List<AnimeResponse> anime() {
-        List<Anime> animeList = animeService.findAll();
-        List<AnimeResponse> responses = animeList.stream().map(anime -> new AnimeResponse(anime.getName(), anime.getEpisode())).toList();
-        return responses;
+    public List<Anime> anime() {
+        return animeService.findAll();
     }
 
     @GetMapping("/{id}")
-    public List<AnimeResponse> findById(@PathVariable int id) {
+    public List<AnimeResponse> findById(@PathVariable @Min(1) int id) {
         Optional<Anime> animeList = animeService.findById(id);
         List<AnimeResponse> responses = animeList.stream().map(anime -> new AnimeResponse(anime.getName(), anime.getEpisode())).toList();
         return responses;
     }
 
     @GetMapping("/episodes")
-    public List<AnimeResponse> findUpToEpisode(@RequestParam("episodes") int episode) {
+    public List<AnimeResponse> findUpToEpisode(@RequestParam("episodes") @Min(12) int episode) {
         List<Anime> animeList = animeService.findUpToEpisode(episode);
         List<AnimeResponse> responses = animeList.stream().map(anime -> new AnimeResponse(anime.getName(), anime.getEpisode())).toList();
         return responses;
     }
 
     @PostMapping
-    public ResponseEntity<Anime> createAnimeDate(@RequestBody AnimeCreateForm form, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<Anime> createAnimeDate(@RequestBody @Valid AnimeCreateForm form, UriComponentsBuilder uriBuilder){
         Anime animeList = animeService.createAnimeData(form.getName(), form.getEpisode());
         URI url = uriBuilder
                 .path("/anime/" + animeList.getId())
@@ -55,14 +57,14 @@ public class AnimeController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Map<String,String>> updateAnimeDate(@PathVariable int id, @RequestBody AnimeUpdateForm form){
+    public ResponseEntity<Map<String,String>> updateAnimeDate(@PathVariable @Min(1) int id, @RequestBody @Valid AnimeUpdateForm form){
         animeService.updateAnimeData(id,form.getName(),form.getEpisode());
         return ResponseEntity.ok(Map.of("message","Anime successfully updated"));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable int id){
+    public ResponseEntity<String> deleteById(@PathVariable @Min(1) int id){
         animeService.deleteById(id);
-        return ResponseEntity.ok("Anime data was successfully created");
+        return ResponseEntity.ok("Anime data was successfully deleted");
     }
 }

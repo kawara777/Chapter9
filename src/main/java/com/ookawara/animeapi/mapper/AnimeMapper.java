@@ -23,7 +23,7 @@ public interface AnimeMapper {
      void createAnimeData(Anime createAnimeData);
 
     @Update("update anime set name = #{name},episode = #{episode} where id = #{id}")
-    void updateAnimeData(int id, String name, int episode);
+    void updateAnimeData(Anime updateAnime);
 
     @Delete("delete from anime where id = #{id}")
     void deleteById(int id);
