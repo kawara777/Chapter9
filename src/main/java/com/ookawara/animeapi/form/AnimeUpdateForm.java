@@ -1,6 +1,7 @@
-package com.ookawara.AnimeAPI;
+package com.ookawara.animeapi.form;
 
 public class AnimeUpdateForm {
+
     private String name;
     private int episode;
 

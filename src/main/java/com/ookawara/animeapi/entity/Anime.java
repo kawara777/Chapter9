@@ -1,4 +1,4 @@
-package com.ookawara.AnimeAPI.entity;
+package com.ookawara.animeapi.entity;
 
 public class Anime {
 

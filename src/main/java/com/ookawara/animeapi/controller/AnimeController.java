@@ -1,9 +1,9 @@
-package com.ookawara.AnimeAPI.controller;
+package com.ookawara.animeapi.controller;
 
-import com.ookawara.AnimeAPI.AnimeUpdateForm;
-import com.ookawara.AnimeAPI.form.AnimeCreateForm;
-import com.ookawara.AnimeAPI.service.AnimeService;
-import com.ookawara.AnimeAPI.entity.Anime;
+import com.ookawara.animeapi.entity.Anime;
+import com.ookawara.animeapi.form.AnimeCreateForm;
+import com.ookawara.animeapi.form.AnimeUpdateForm;
+import com.ookawara.animeapi.service.AnimeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -57,7 +57,7 @@ public class AnimeController {
     @PatchMapping("/{id}")
     public ResponseEntity<Map<String,String>> updateAnimeDate(@PathVariable int id, @RequestBody AnimeUpdateForm form){
         animeService.updateAnimeData(id,form.getName(),form.getEpisode());
-        return ResponseEntity.ok(Map.of("massage","Anime successfully updated"));
+        return ResponseEntity.ok(Map.of("message","Anime successfully updated"));
     }
 
     @DeleteMapping("/{id}")

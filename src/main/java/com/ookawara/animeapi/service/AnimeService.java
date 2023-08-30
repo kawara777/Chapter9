@@ -1,6 +1,6 @@
-package com.ookawara.AnimeAPI.service;
+package com.ookawara.animeapi.service;
 
-import com.ookawara.AnimeAPI.entity.Anime;
+import com.ookawara.animeapi.entity.Anime;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +15,7 @@ public interface AnimeService {
 
     Anime createAnimeData(String name, int episode);
 
-    void updateAnimeData(int id,String name,int episode);
+    void updateAnimeData(int id, String name, int episode);
 
     void deleteById(int id);
 }
