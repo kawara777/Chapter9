@@ -33,9 +33,9 @@ public class AnimeController {
     }
 
     @GetMapping("/{id}")
-    public List<AnimeResponse> findById(@PathVariable @Min(1) int id) {
-        Optional<Anime> animeList = animeService.findById(id);
-        List<AnimeResponse> responses = animeList.stream().map(anime -> new AnimeResponse(anime.getName(), anime.getEpisode())).toList();
+    public List<AnimeResponse> findById(@PathVariable @Min(1) int id) throws Exception {
+        Anime anime = animeService.findById(id);
+        List<AnimeResponse> responses = anime.stream().map(anime -> new AnimeResponse(anime)).toList();
         return responses;
     }
 
@@ -47,7 +47,7 @@ public class AnimeController {
     }
 
     @PostMapping
-    public ResponseEntity<Anime> createAnimeDate(@RequestBody @Valid AnimeCreateForm form, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<Anime> createAnimeDate(@RequestBody @Valid AnimeCreateForm form, UriComponentsBuilder uriBuilder) {
         Anime animeList = animeService.createAnimeData(form.getName(), form.getEpisode());
         URI url = uriBuilder
                 .path("/anime/" + animeList.getId())
@@ -57,13 +57,13 @@ public class AnimeController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Map<String,String>> updateAnimeDate(@PathVariable @Min(1) int id, @RequestBody @Valid AnimeUpdateForm form){
-        animeService.updateAnimeData(id,form.getName(),form.getEpisode());
-        return ResponseEntity.ok(Map.of("message","Anime successfully updated"));
+    public ResponseEntity<Map<String, String>> updateAnimeDate(@PathVariable @Min(1) int id, @RequestBody @Valid AnimeUpdateForm form) {
+        animeService.updateAnimeData(id, form.getName(), form.getEpisode());
+        return ResponseEntity.ok(Map.of("message", "Anime successfully updated"));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable @Min(1) int id){
+    public ResponseEntity<String> deleteById(@PathVariable @Min(1) int id) {
         animeService.deleteById(id);
         return ResponseEntity.ok("Anime data was successfully deleted");
     }
