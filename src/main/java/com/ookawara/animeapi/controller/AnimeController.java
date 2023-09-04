@@ -56,7 +56,7 @@ public class AnimeController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Map<String, String>> updateAnimeDate(@PathVariable @Min(1) int id, @RequestBody @Valid AnimeUpdateForm form) {
+    public ResponseEntity<Map<String, String>> updateAnimeDate(@PathVariable @Min(1) int id, @RequestBody @Valid AnimeUpdateForm form) throws Exception{
         animeService.updateAnimeData(id, form.getName(), form.getEpisode());
         return ResponseEntity.ok(Map.of("message", "Anime successfully updated"));
     }
