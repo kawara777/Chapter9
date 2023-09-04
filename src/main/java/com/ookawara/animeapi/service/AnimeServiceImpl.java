@@ -23,10 +23,10 @@ public class AnimeServiceImpl implements AnimeService{
     }
 
     @Override
-    public Optional<Anime> findById(int id){
+    public Anime findById(int id){
         Optional<Anime> anime = this.animeMapper.findById(id);
         if (anime.isPresent()){
-            return Optional.of(anime.get());
+            return anime.get();
         } else {
             throw new AnimeNotFoundException("ID:" + id + "のデータは存在しません。");
         }

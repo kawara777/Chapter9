@@ -3,14 +3,14 @@ package com.ookawara.animeapi.service;
 import com.ookawara.animeapi.entity.Anime;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface AnimeService {
 
     List<Anime> findAll();
 
-    Optional<Anime> findById(int id);
+//    Optional<Anime> findById(int id);
 
+    Anime findById(int id) throws Exception;
     List<Anime> findUpToEpisode(int episode);
 
     Anime createAnimeData(String name, int episode);

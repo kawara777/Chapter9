@@ -14,7 +14,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Validated
 @RestController
@@ -33,10 +32,10 @@ public class AnimeController {
     }
 
     @GetMapping("/{id}")
-    public List<AnimeResponse> findById(@PathVariable @Min(1) int id) throws Exception {
+    public AnimeResponse findById(@PathVariable @Min(1) int id) throws Exception {
         Anime anime = animeService.findById(id);
-        List<AnimeResponse> responses = anime.stream().map(anime -> new AnimeResponse(anime)).toList();
-        return responses;
+        AnimeResponse animeResponse = new AnimeResponse(anime.getName(), anime.getEpisode());
+        return animeResponse;
     }
 
     @GetMapping("/episodes")
