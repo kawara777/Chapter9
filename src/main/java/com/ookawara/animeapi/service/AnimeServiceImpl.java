@@ -1,6 +1,7 @@
 package com.ookawara.animeapi.service;
 
 import com.ookawara.animeapi.entity.Anime;
+import com.ookawara.animeapi.exception.AnimeNotFoundException;
 import com.ookawara.animeapi.mapper.AnimeMapper;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,14 @@ public class AnimeServiceImpl implements AnimeService{
     }
 
     @Override
-    public Optional<Anime> findById(int id){
-        return animeMapper.findById(id);
+    public Anime findById(int id){
+        Optional<Anime> anime = this.animeMapper.findById(id);
+        if (anime.isPresent()){
+            return anime.get();
+        } else {
+            throw new AnimeNotFoundException("ID:" + id + "のデータは存在しません。");
+        }
+
     }
 
     @Override
@@ -39,8 +46,9 @@ public class AnimeServiceImpl implements AnimeService{
     }
 
     @Override
-    public void updateAnimeData(int id, String name, int episode){
-        animeMapper.updateAnimeData(id, name ,episode);
+    public void updateAnimeData(int id, String name, int episode) {
+        Anime anime = animeMapper.findById(id).orElseThrow(() -> new AnimeNotFoundException("ID:" + id + "のデータは存在しません。"));
+        animeMapper.updateAnimeData(anime);
     }
 
     @Override
